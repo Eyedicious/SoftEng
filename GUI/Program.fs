@@ -11,6 +11,7 @@ let button =
 let form = 
     let temp = new Form()
     do temp.ClientSize <- new System.Drawing.Size(100,100)
+    do temp.Controls.Add(button)
     temp
 
 
