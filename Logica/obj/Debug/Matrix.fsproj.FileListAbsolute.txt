@@ -1,4 +1,0 @@
-G:\Users\Bart\Documents\MVC-herkansing-2015\Logica\Logica\bin\Debug\Logica.XML
-G:\Users\Bart\Documents\MVC-herkansing-2015\Logica\Logica\obj\Debug\Matrix.fsprojResolveAssemblyReference.cache
-G:\Users\Bart\Documents\MVC-herkansing-2015\Logica\Logica\obj\Debug\Logica.exe
-G:\Users\Bart\Documents\MVC-herkansing-2015\Logica\Logica\obj\Debug\Logica.pdb

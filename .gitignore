@@ -1,0 +1,17 @@
+*.exe
+Logica.sln
+Logica.v11.suo
+GUI/bin/*
+GUI/obj/*
+GUI/Properties/*
+GUI/App.config
+GUI/GUI.fsproj
+Logica/bin/*
+Logica/obj/*
+Logica/Matrix.fsproj
+Logica/App.config
+sh.exe.stackdump
+GUI/App.config
+SupplyChainSimulator.fsproj
+SupplyChainSimulator.sln
+GUI/SupplyChainSimulator.v11.suo
