@@ -2,7 +2,7 @@
 
 open Truck
 
-let resources = ["Grain", "Copper", "Iron", "Chair", "Coffee", "Potatoes", "Goo", "Pizza", "Math", "Wood", "Uranium", "Nuclear Warhead"]
+let resources = ["Grain", "Copper", "Iron", "Chair", "Coffee", "Potatoes", "Goo", "Pizza", "Math", "Wood", "Uranium", "Nuclear Warhead", "Sugar", "Wealthy spoiled bratty kids", "Taco Bell", "Gold"]
 
 type Factory = 
     {
