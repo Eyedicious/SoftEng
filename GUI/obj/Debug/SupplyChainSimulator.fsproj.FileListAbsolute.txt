@@ -1,0 +1,9 @@
+C:\Users\Reminblack\Documents\GitHub\fsharpprog\SupplyChainSimulator\bin\Debug\SupplyChainSimulator.exe.config
+C:\Users\Reminblack\Documents\GitHub\fsharpprog\SupplyChainSimulator\bin\Debug\SupplyChainSimulator.XML
+C:\Users\Reminblack\Documents\GitHub\fsharpprog\SupplyChainSimulator\bin\Debug\SupplyChainSimulator.exe
+C:\Users\Reminblack\Documents\GitHub\fsharpprog\SupplyChainSimulator\bin\Debug\SupplyChainSimulator.pdb
+C:\Users\Reminblack\Documents\GitHub\fsharpprog\SupplyChainSimulator\bin\Debug\FSharp.Core.dll
+C:\Users\Reminblack\Documents\GitHub\fsharpprog\SupplyChainSimulator\bin\Debug\FSharp.Core.xml
+C:\Users\Reminblack\Documents\GitHub\fsharpprog\SupplyChainSimulator\obj\Debug\SupplyChainSimulator.fsprojResolveAssemblyReference.cache
+C:\Users\Reminblack\Documents\GitHub\fsharpprog\SupplyChainSimulator\obj\Debug\SupplyChainSimulator.exe
+C:\Users\Reminblack\Documents\GitHub\fsharpprog\SupplyChainSimulator\obj\Debug\SupplyChainSimulator.pdb
