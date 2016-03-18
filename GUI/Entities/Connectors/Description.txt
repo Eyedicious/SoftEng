@@ -1,0 +1,6 @@
+Connectors
+
+Roads
+Railroad
+Flight patterns
+Ship patterns
