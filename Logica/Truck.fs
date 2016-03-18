@@ -19,4 +19,4 @@ type Truck =
         add t.coordinatesX x
         add t.coordinatesY y
      
-     override this.ToString() = "Factory is located at ( "+this.coordinatesX.ToString()+", "+this.coordinatesY.ToString()+" ) and producing "+this.productionType+")"
+     override this.ToString() = "Factory is located at ( "+this.coordinatesX.ToString()+", "+this.coordinatesY.ToString()+" ) and producing "+this.contentContainer+")"
