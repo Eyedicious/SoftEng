@@ -23,6 +23,8 @@ C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplicatio
 G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\ConsoleApplication1.exe.config
 G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\obj\Debug\ConsoleApplication1.exe
 G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\obj\Debug\ConsoleApplication1.pdb
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Content\factory-1.jpg
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Content\background_map.jpg
 G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\ConsoleApplication1.exe
 G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\ConsoleApplication1.pdb
 G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Library1.dll
@@ -40,5 +42,3 @@ G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug
 G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Library1.xml
 G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\MonoGame.Framework.xml
 G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\obj\Debug\CapitalismFrontEnd.csprojResolveAssemblyReference.cache
-G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Content\background_map.png
-G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Content\factory-1.png

@@ -44,14 +44,21 @@ let getResource = resources.Item(RNG)
 
 //let image = image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory+"\Graphical Interface\Images\factory-1.jpg")
 
-type Factory(x, y) = 
-   let coordinates = (x, y)
-   let productionType = resources.Item(System.Random().Next(0, resources.Length)) |> string
-   
-   member f.SpawnResource() = 
-      Truck.Create(ref (fst coordinates), ref (snd coordinates), productionType)
-   member f.getPosition() = coordinates 
-   override this.ToString() = "Factory is located at ( "+(fst coordinates).ToString()+", "+(snd coordinates).ToString()+" ) 
-                                 and producing "+productionType+")"
+type Factory = 
+   {
+      coordinates: int * int
+      productionType: string
+   } with
+     static member Create(x, y) = 
+         {
+            coordinates = (x, y)
+            productionType = resources.[System.Random().Next(0, resources.Length)] |> string
+         }
+
+      member f.SpawnResource() = 
+         Truck.Create(ref (fst f.coordinates), ref (snd f.coordinates), f.productionType)
+      member f.getPosition() = f.coordinates 
+     override this.ToString() = "Factory is located at ( "+(fst this.coordinates).ToString()+", "+(snd this.coordinates).ToString()+" ) 
+                                 and producing "+this.productionType+")"
 
 
