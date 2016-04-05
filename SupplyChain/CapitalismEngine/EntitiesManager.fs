@@ -1,10 +1,12 @@
 ﻿module EntitiesManager
 
 open Entities
+        
+let RandomGen = new System.Random()
+let RandomNumberH(vL) = RandomGen.Next(0,vL)
+let RandomNumberV(vL) = RandomGen.Next(0,vL)
 
-let tuple x y = (x,y)
-let RandomNumber(vL) = System.Random().Next(0,vL)
-
-let spawnFactory =
-   Factory.Create(RandomNumber(1600), RandomNumber(800))
+let spawnFactory() =
+   let newFactory = new Factory(RandomNumberH(1600), RandomNumberV(1600))
+   newFactory
    

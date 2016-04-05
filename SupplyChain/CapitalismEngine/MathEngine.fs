@@ -3,7 +3,7 @@
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Input
 
-let factoryAmount = 10
+let factoryAmount = 10000
 
 type Spawnable =
    | Cooldown of float32
@@ -40,25 +40,32 @@ let initialize() =
 //      //
 //   }
 //
-let Update(dt : float32)(gameState : GameState) =
-   let (newFactory:List<Entities.Factory>),newSpawnState =
-      if gameState.Factories.Length < factoryAmount then
-         match gameState.Spawnrate with
-         | Ready ->
-            EntitiesManager.spawnFactory :: [], Cooldown 5.0f
-         | Cooldown c->
-            if c > 0.0f then
-               [],Cooldown(c-dt)
-            else
-               [],Ready
+let UpdateFactories(spawnNewFactory)(listOfFactories:List<Entities.Factory>) =
+   let newFactoriesList =
+      if listOfFactories.Length < factoryAmount then
+         if spawnNewFactory then
+            EntitiesManager.spawnFactory() :: listOfFactories
+         else
+            listOfFactories
       else
-         [],Ready
-         
+         listOfFactories
+   newFactoriesList
+
+let Update(dt : float32)(gameState : GameState) =
+   let spawnNewFactory, newSpawnState =
+      match gameState.Spawnrate with
+      | Ready ->
+         true, Cooldown 0.0f
+      | Cooldown c->
+         if c > 0.0f then
+            false, Cooldown(c-dt)
+         else
+            false, Ready     
    { 
-      gameState with Factories   = gameState.Factories
+      gameState with Spawnrate   = newSpawnState
+                     Factories   = UpdateFactories spawnNewFactory gameState.Factories
                      Trucks      = gameState.Trucks
                      Endpoints   = gameState.Endpoints
-                     Spawnrate   = newSpawnState
    }
 
 let drawFactory(factory:Entities.Factory) : Drawable =
