@@ -16,13 +16,13 @@ SupplyChainSimulator.fsproj
 SupplyChainSimulator.sln
 GUI/SupplyChainSimulator.v11.suo
 
-CapitalismEngine/bin/*
-CapitalismEngine/obj/*
-CapitalismEngine/Script.fsx
-packages/*
-SupplyChainFrontEnd.sln
-SupplyChainFrontEnd.v11.suo
-SupplyChainFrontEnd/bin/*
-SupplyChainFrontEnd/obj/*
-SupplyChainFrontEnd/Properties/*
+SupplyChain/CapitalismEngine/bin/*
+SupplyChain/CapitalismEngine/obj/*
+SupplyChain/CapitalismEngine/Script.fsx
+SupplyChain/packages/*
+SupplyChain/SupplyChainFrontEnd.sln
+SupplyChain/SupplyChainFrontEnd.v11.suo
+SupplyChain/SupplyChainFrontEnd/bin/*
+SupplyChain/SupplyChainFrontEnd/obj/*
+SupplyChain/SupplyChainFrontEnd/Properties/*
 
