@@ -1,6 +1,0 @@
-Points
-
-Endpoints
-Factories
-Cities
-Inbetween Hubs
