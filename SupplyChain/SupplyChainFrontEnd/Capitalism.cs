@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CapitalismFrontend
 {
-    
+
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -56,7 +56,7 @@ namespace CapitalismFrontend
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            background = Content.Load<Texture2D>("background_map.jpg");
+            background = Content.Load<Texture2D>("background_map.png");
             gameWindowSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             // TODO: use this.Content to load your game content here
         }
@@ -83,7 +83,7 @@ namespace CapitalismFrontend
 
             // TODO: Add your update logic here
 
-            MathEngine.Update((float)gameTime.ElapsedGameTime.Seconds, gameState);
+            gameState = MathEngine.Update((float)gameTime.ElapsedGameTime.TotalSeconds, gameState);
             base.Update(gameTime);
         }
 
@@ -96,16 +96,12 @@ namespace CapitalismFrontend
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             spriteBatch.Draw(background, gameWindowSize, Color.White);
-            Console.WriteLine("A");
-            int i = 0;
-            foreach(var drawable in MathEngine.drawState(gameState))
+            foreach (var drawable in MathEngine.drawState(gameState))
             {
-                Console.WriteLine("B"+i++);
                 spriteBatch.Draw(Content.Load<Texture2D>(drawable.Image), drawable.Position, Color.White);
             }
-            Console.WriteLine("C");
             spriteBatch.End();
-            
+
             base.Draw(gameTime);
         }
 

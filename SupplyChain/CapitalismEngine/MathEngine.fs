@@ -40,31 +40,52 @@ let initialize() =
 //      //
 //   }
 //
-let Update(dt : float32)(gameState : GameState) =
-   let (newFactory:List<Entities.Factory>),newSpawnState =
-      if gameState.Factories.Length < factoryAmount then
-         match gameState.Spawnrate with
-         | Ready ->
-            EntitiesManager.spawnFactory :: [], Cooldown 5.0f
-         | Cooldown c->
-            if c > 0.0f then
-               [],Cooldown(c-dt)
-            else
-               [],Ready
+let updateFactory (dt:float32) (factory:Entities.Factory) = 
+   
+
+let isFactoryProductive fn (dt:float32) (factories:List<Entities.Factory>) = 
+   let rec inspectFactory (factories:List<Entities.Factory>) = function
+      | [] -> []
+      | ([f]) -> fn dt f
+      | (f::fs) -> (fn dt f)::(inspectFactory fs)
+   inspectFactory
+
+let UpdateFactories (dt : float32)(spawnNewFactory)(listOfFactories:List<Entities.Factory>) =
+   let newFactoriesList =
+      if listOfFactories.Length < factoryAmount then
+         if spawnNewFactory then
+            EntitiesManager.spawnFactory() :: listOfFactories
+         else
+            listOfFactories
       else
-         [],Ready
          
+         listOfFactories
+   newFactoriesList
+
+let UpdateTrucks(dt : float32)(factories: List<Entities.Factory>)(trucks : List<Entities.Truck>) = 
+    
+
+let Update(dt : float32)(gameState : GameState) =
+   let spawnNewFactory, newSpawnState =
+      match gameState.Spawnrate with
+      | Ready ->
+         true, Cooldown 0.0f
+      | Cooldown c->
+         if c > 0.0f then
+            false, Cooldown(c-dt)
+         else
+            false, Ready     
    { 
-      gameState with Factories   = gameState.Factories
+      gameState with Spawnrate   = newSpawnState
+                     Factories   = UpdateFactories dt spawnNewFactory gameState.Factories
                      Trucks      = gameState.Trucks
                      Endpoints   = gameState.Endpoints
-                     Spawnrate   = newSpawnState
    }
 
 let drawFactory(factory:Entities.Factory) : Drawable =
   {
     Drawable.Position = Vector2((float32(fst(factory.getPosition()))),(float32(snd (factory.getPosition()))))
-    Drawable.Image    = "factory-1.png"
+    Drawable.Image    = "factory-11.png"
   }
 
 let drawState (gameState:GameState) : seq<Drawable> =
