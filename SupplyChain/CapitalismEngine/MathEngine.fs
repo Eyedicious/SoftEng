@@ -40,17 +40,28 @@ let initialize() =
 //      //
 //   }
 //
-let updateFactory (dt:float32) (factory:Entities.Factory) = 
-   
+let doCheck (fn:'a->'b->'c) (y:'a) (x:List<'b>) =     //Foreach x DO fn y x and return the editted list
+   let rec inspectX (x:List<'b>) = 
+      match x with
+         | [] -> []
+         | ([x]) -> fn y x :: []
+         | (x::xs) -> (fn y x)::(inspectX xs)
+   inspectX
 
-let isFactoryProductive fn (dt:float32) (factories:List<Entities.Factory>) = 
-   let rec inspectFactory (factories:List<Entities.Factory>) = function
-      | [] -> []
-      | ([f]) -> fn dt f
-      | (f::fs) -> (fn dt f)::(inspectFactory fs)
-   inspectFactory
+let updateFactory (dt:float32) (factory:Entities.Factory) =
+   match factory.laboring with
+   |  Entities.Production.Ready ->
+      { factory with laboring = Entities.Production.Working 10.0f }
+   | Entities.Production.Working w ->
+      if w > 0.0f then
+         { factory with laboring = Entities.Production.Ready }
+      else
+         { factory with laboring = Entities.Production.Working(w-dt) }
 
 let UpdateFactories (dt : float32)(spawnNewFactory)(listOfFactories:List<Entities.Factory>) =
+   
+   let factories = listOfFactories |> doCheck updateFactory dt
+   
    let newFactoriesList =
       if listOfFactories.Length < factoryAmount then
          if spawnNewFactory then
@@ -58,12 +69,19 @@ let UpdateFactories (dt : float32)(spawnNewFactory)(listOfFactories:List<Entitie
          else
             listOfFactories
       else
-         
          listOfFactories
    newFactoriesList
 
+let UpdateTruck (dt:float32) (truck:Entities.Truck) = 
+   truck
+
 let UpdateTrucks(dt : float32)(factories: List<Entities.Factory>)(trucks : List<Entities.Truck>) = 
-    
+    let trucks = trucks |> doCheck UpdateTruck dt
+
+    let newTrucks = 
+      
+
+    trucks
 
 let Update(dt : float32)(gameState : GameState) =
    let spawnNewFactory, newSpawnState =
