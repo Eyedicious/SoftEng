@@ -1,0 +1,38 @@
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\bin\Debug\Library1.XML
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\bin\Debug\Library1.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\bin\Debug\Library1.pdb
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\bin\Debug\FSharp.Core.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\bin\Debug\MonoGame.Framework.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\bin\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\bin\Debug\SharpDX.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\bin\Debug\SharpDX.XAudio2.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\bin\Debug\SharpDX.DXGI.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\bin\Debug\SharpDX.Direct3D11.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\bin\Debug\SharpDX.Direct2D1.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\bin\Debug\SharpDX.XInput.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\bin\Debug\SharpDX.RawInput.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\bin\Debug\MonoGame.Framework.xml
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\bin\Debug\FSharp.Core.xml
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\obj\Debug\Library1.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\obj\Debug\Library1.pdb
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Library1\obj\Debug\CapitalismEngine.fsprojResolveAssemblyReference.cache
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\Library1.XML
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\Library1.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\Library1.pdb
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\FSharp.Core.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\MonoGame.Framework.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\SharpDX.MediaFoundation.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\SharpDX.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\SharpDX.XAudio2.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\SharpDX.DXGI.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\SharpDX.Direct3D11.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\SharpDX.Direct2D1.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\SharpDX.XInput.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\SharpDX.RawInput.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\SharpDX.Direct3D9.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\MonoGame.Framework.xml
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\FSharp.Core.xml
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\obj\Debug\CapitalismEngine.fsprojResolveAssemblyReference.cache
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\obj\Debug\Library1.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\obj\Debug\Library1.pdb

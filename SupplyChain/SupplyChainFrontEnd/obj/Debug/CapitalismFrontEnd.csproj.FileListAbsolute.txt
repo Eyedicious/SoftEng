@@ -1,0 +1,45 @@
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\Library1.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\MonoGame.Framework.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\SharpDX.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\SharpDX.XAudio2.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\SharpDX.DXGI.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\SharpDX.Direct3D11.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\SharpDX.Direct2D1.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\SharpDX.XInput.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\SharpDX.RawInput.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\Library1.pdb
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\Library1.xml
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\MonoGame.Framework.xml
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\obj\Debug\CapitalismFrontEnd.csprojResolveAssemblyReference.cache
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\Content\factory-1.jpg
+C:\Users\Bart de Ruijter\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\bin\Debug\Content\background_map.jpg
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\ConsoleApplication1.exe.config
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\obj\Debug\ConsoleApplication1.exe
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\obj\Debug\ConsoleApplication1.pdb
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\ConsoleApplication1.exe
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\ConsoleApplication1.pdb
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Library1.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\MonoGame.Framework.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\SharpDX.MediaFoundation.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\SharpDX.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\SharpDX.XAudio2.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\SharpDX.DXGI.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\SharpDX.Direct3D11.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\SharpDX.Direct2D1.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\SharpDX.XInput.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\SharpDX.RawInput.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\SharpDX.Direct3D9.dll
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Library1.pdb
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Library1.xml
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\MonoGame.Framework.xml
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\obj\Debug\CapitalismFrontEnd.csprojResolveAssemblyReference.cache
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Content\background_map.png
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Content\factory-1.png
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Content\Tbmcns.png
