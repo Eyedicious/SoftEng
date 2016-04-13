@@ -15,7 +15,15 @@ GUI/App.config
 SupplyChainSimulator.fsproj
 SupplyChainSimulator.sln
 GUI/SupplyChainSimulator.v11.suo
-
+*.suo
+SupplyChain/SupplyChainFrontEnd.v11.suo
+*.cache
+SupplyChain/SupplyChainFrontEnd/obj/Debug/CapitalismFrontEnd.csproj.FileListAbsolute.txt
+SupplyChain/SupplyChainFrontEnd/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+SupplyChain/SupplyChainFrontEnd.v11.suo
+SupplyChain/SupplyChainFrontEnd/CapitalismFrontEnd.csproj
+SupplyChain/SupplyChainFrontEnd/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+SupplyChain/SupplyChainFrontEnd/obj/Debug/CapitalismFrontEnd.csproj.FileListAbsolute.txt
 SupplyChain/CapitalismEngine/bin/*
 SupplyChain/CapitalismEngine/obj/*
 SupplyChain/CapitalismEngine/Script.fsx
@@ -25,4 +33,9 @@ SupplyChain/SupplyChainFrontEnd.v11.suo
 SupplyChain/SupplyChainFrontEnd/bin/*
 SupplyChain/SupplyChainFrontEnd/obj/*
 SupplyChain/SupplyChainFrontEnd/Properties/*
-
+*.dll
+SupplyChain/CapitalismEngine/bin/Debug/Library1.pdb
+*.XML
+*.pdb
+SupplyChain/SupplyChainFrontEnd/obj/Debug/CapitalismFrontEnd.csproj.FileListAbsolute.txt
+*.cache
