@@ -42,3 +42,4 @@ G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug
 G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\obj\Debug\CapitalismFrontEnd.csprojResolveAssemblyReference.cache
 G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Content\background_map.png
 G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Content\factory-1.png
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Content\Tbmcns.png

@@ -42,6 +42,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
@@ -54,10 +55,10 @@
     <Compile Include="CanvasBuilder.fs" />
     <Compile Include="Entities.fs" />
     <Compile Include="EntitiesManager.fs" />
+    <Compile Include="BitmapProcessing.fs" />
     <Compile Include="MathEngine.fs" />
     <None Include="Script.fsx" />
     <None Include="packages.config" />
-    <Compile Include="Kill.fs" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>

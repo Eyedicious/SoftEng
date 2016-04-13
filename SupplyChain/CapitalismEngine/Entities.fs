@@ -38,15 +38,12 @@ type Endpoint =
      override this.ToString() = "Endpoint is located at ( "+this.coordinatesX.ToString()+", "+this.coordinatesY.ToString()+")"
 
 
-let resources = ["Grain", "Copper", "Iron", "Chair", "Coffee", "Potatoes", "Goo", "Pizza", "Math", "Wood", "Uranium", "Nuclear Warhead", "Sugar", "Wealthy spoiled bratty kids", "Taco Bell", "Gold"]
-let RNG = System.Random().Next(0, resources.Length-1);
-let getResource = resources.Item(RNG)
-
-//let image = image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory+"\Graphical Interface\Images\factory-1.jpg")
+let resources = ["Grain"; "Copper"; "Iron"; "Chair"; "Coffee"; "Potatoes"; "Goo"; "Pizza"; "Math"; "Wood"; "Uranium"; "Nuclear Warhead"; "Sugar"; "Wealthy spoiled bratty kids"; "Taco Bell"; "Gold"]
+let RNG = new System.Random()
 
 type Factory(x, y) = 
    let coordinates = (x, y)
-   let productionType = resources.Item(System.Random().Next(0, resources.Length)) |> string
+   let productionType = resources.[RNG.Next(0, resources.Length-1)]
    
    member f.SpawnResource() = 
       Truck.Create(ref (fst coordinates), ref (snd coordinates), productionType)

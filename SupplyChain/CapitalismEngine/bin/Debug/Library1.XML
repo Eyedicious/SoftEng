@@ -2,6 +2,36 @@
 <doc>
 <assembly><name>Library1</name></assembly>
 <members>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:BitmapProcessing">
+
+</member>
 <member name="T:CanvasBuilder">
 
 </member>
@@ -98,9 +128,6 @@
 <member name="">
 
 </member>
-<member name="">
-
-</member>
 <member name="T:Entities">
 
 </member>
@@ -120,9 +147,6 @@
 
 </member>
 <member name="">
-
-</member>
-<member name="T:Kill">
 
 </member>
 <member name="">

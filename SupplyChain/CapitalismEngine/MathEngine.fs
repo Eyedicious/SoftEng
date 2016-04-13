@@ -30,16 +30,8 @@ let initialize() =
     Endpoints  = []
     Spawnrate  = Spawnable.Ready
   }
-//let LoadContent() =
-//   {
-//      //
-//   }
-//
-//let UnloadContent() =
-//   {
-//      //
-//   }
-//
+
+
 let UpdateFactories(spawnNewFactory)(listOfFactories:List<Entities.Factory>) =
    let newFactoriesList =
       if listOfFactories.Length < factoryAmount then
@@ -76,10 +68,11 @@ let drawFactory(factory:Entities.Factory) : Drawable =
 
 let drawState (gameState:GameState) : seq<Drawable> =
    let newDrawableFactories = Seq.empty
-//   Terrible recursive attempt to do the map function FUCK MIDNIGHT PROGRAMMING. ps. gotta fix dis
-//   let rec loop (acc:List<Entities.Factory>) = function
-//      | [] -> List.rev acc
-//      | head::tail -> drawFactory(head) :: newDrawableFactories loop tail
-//   []
    let newList = gameState.Factories |> List.map(fun factory -> drawFactory(factory))
    newList |> Seq.cast
+ 
+open BitmapProcessing
+   
+let ImageToBitMap(imagePath:string) = 
+   let x = BitmapProcessing.getAverageColor(BitmapProcessing.loadAndScale(imagePath))
+   printfn "Time elapsed"
