@@ -3,13 +3,15 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CapitalismFrontend
 {
-
+    
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -20,6 +22,8 @@ namespace CapitalismFrontend
         MathEngine.GameState gameState;
         Texture2D background;
         Rectangle gameWindowSize;
+
+        String backgroundImageName = "background_map.png";
 
         public Capitalism()
         {
@@ -56,7 +60,8 @@ namespace CapitalismFrontend
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            background = Content.Load<Texture2D>("background_map.png");
+            background = Content.Load<Texture2D>(backgroundImageName);
+            MathEngine.ImageToBitMap(pathForImage("background_map.png"));
             gameWindowSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             // TODO: use this.Content to load your game content here
         }
@@ -96,12 +101,12 @@ namespace CapitalismFrontend
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             spriteBatch.Draw(background, gameWindowSize, Color.White);
-            foreach (var drawable in MathEngine.drawState(gameState))
+            foreach(var drawable in MathEngine.drawState(gameState))
             {
                 spriteBatch.Draw(Content.Load<Texture2D>(drawable.Image), drawable.Position, Color.White);
             }
             spriteBatch.End();
-
+            
             base.Draw(gameTime);
         }
 
@@ -111,6 +116,23 @@ namespace CapitalismFrontend
             {
                 game.Run();
             }
+        }
+
+
+        /// <summary>
+        /// Constructs path to output folder
+        /// Combines output path with requested image from content folder.
+        /// Turns the path into a usable path and returns this.
+        /// </summary>
+        /// <param name="imageNameAndExtension">Image to get the path for with extensions ("smelly_pants.jpg")</param>
+        /// <returns>Local path of the image</returns>
+        public String pathForImage(String imageNameAndExtension)
+        {
+            var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
+            var logoimage = Path.Combine(outPutDirectory, "Content\\" + imageNameAndExtension);
+            string relPath = new Uri(logoimage).LocalPath;
+
+            return relPath;
         }
     }
 }
