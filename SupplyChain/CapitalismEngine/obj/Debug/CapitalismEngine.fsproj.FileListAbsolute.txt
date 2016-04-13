@@ -36,7 +36,3 @@ G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\FS
 G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\obj\Debug\CapitalismEngine.fsprojResolveAssemblyReference.cache
 G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\obj\Debug\Library1.dll
 G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\CapitalismEngine\obj\Debug\Library1.pdb
-F:\GitHub\SoftEng\SupplyChain\CapitalismEngine\bin\Debug\Library1.XML
-F:\GitHub\SoftEng\SupplyChain\CapitalismEngine\obj\Debug\CapitalismEngine.fsprojResolveAssemblyReference.cache
-F:\GitHub\SoftEng\SupplyChain\CapitalismEngine\obj\Debug\Library1.dll
-F:\GitHub\SoftEng\SupplyChain\CapitalismEngine\obj\Debug\Library1.pdb
