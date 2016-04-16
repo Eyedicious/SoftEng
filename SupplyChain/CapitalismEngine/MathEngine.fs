@@ -1,5 +1,6 @@
 ﻿module MathEngine
 
+open Entities
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Input
 
@@ -40,7 +41,17 @@ let initialize() =
 //      //
 //   }
 //
-let doCheck (fn:'a->'b->'c) (y:'a) (x:List<'b>) =     //Foreach x DO fn y x and return the editted list
+let rec filter (fn:'a -> bool) (e:'a List) = 
+   match e with
+   | [] -> []
+   | (x::xs) ->
+      if fn x then
+         x :: filter fn xs
+      else
+         filter fn xs
+
+
+let foreachDo (fn:'a->'b->'c) (y:'a) (x:List<'b>) =     //Foreach x DO fn y x and return the editted list
    let rec inspectX (x:List<'b>) = 
       match x with
          | [] -> []
@@ -53,14 +64,14 @@ let updateFactory (dt:float32) (factory:Entities.Factory) =
    |  Entities.Production.Ready ->
       { factory with laboring = Entities.Production.Working 10.0f }
    | Entities.Production.Working w ->
-      if w > 0.0f then
+      if w < 0.0f then
          { factory with laboring = Entities.Production.Ready }
       else
          { factory with laboring = Entities.Production.Working(w-dt) }
 
 let UpdateFactories (dt : float32)(spawnNewFactory)(listOfFactories:List<Entities.Factory>) =
    
-   let factories = listOfFactories |> doCheck updateFactory dt
+   let factories = listOfFactories |> foreachDo updateFactory dt
    
    let newFactoriesList =
       if listOfFactories.Length < factoryAmount then
@@ -75,10 +86,19 @@ let UpdateFactories (dt : float32)(spawnNewFactory)(listOfFactories:List<Entitie
 let UpdateTruck (dt:float32) (truck:Entities.Truck) = 
    truck
 
-let UpdateTrucks(dt : float32)(factories: List<Entities.Factory>)(trucks : List<Entities.Truck>) = 
-    let trucks = trucks |> doCheck UpdateTruck dt
+let deployTruck destinations (factory:Factory) = 
+   factory.SpawnResource(destinations)
 
-    let newTrucks = 
+let UpdateTrucks(dt : float32)(factories: List<Entities.Factory>)(trucks : List<Entities.Truck>) = 
+   let trucks = trucks |> foreachDo UpdateTruck dt
+
+   let isFactoryProductive (f:Entities.Factory) = 
+      f.laboring = Production.Ready
+   let productiveFactories = filter isFactoryProductive factories
+   let nextShift = foreachDo deployTruck factories factories
+   let jobWellDone (t:Truck) = 
+      if t.coordinatesX = t.
+   let newTrucks = 
       
 
     trucks
