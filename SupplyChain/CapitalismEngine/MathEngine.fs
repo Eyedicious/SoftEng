@@ -89,7 +89,7 @@ let UpdateTruck (dt:float32) (truck:Entities.Truck) =
 let deployTruck destinations (factory:Factory) = 
    factory.SpawnResource(destinations)
 
-let UpdateTrucks(dt : float32)(factories: List<Entities.Factory>)(trucks : List<Entities.Truck>) = 
+let UpdateTrucks(dt : float32)(factories: List<Entities.Factory>)(trucks : List<Entities.Truck>) : Truck List= 
    let trucks = trucks |> foreachDo UpdateTruck dt
 
    let isFactoryProductive (f:Entities.Factory) = 
@@ -97,11 +97,11 @@ let UpdateTrucks(dt : float32)(factories: List<Entities.Factory>)(trucks : List<
    let productiveFactories = filter isFactoryProductive factories
    let nextShift = foreachDo deployTruck factories factories
    let jobWellDone (t:Truck) = 
-      if t.coordinatesX = t.
-   let newTrucks = 
-      
-
-    trucks
+      if t.route.lastWaypoint().coordinatesX = t.coordinatesX && t.route.lastWaypoint().coordinatesY = t.coordinatesY then
+         false
+      else true
+   
+   trucks @ nextShift
 
 let Update(dt : float32)(gameState : GameState) =
    let spawnNewFactory, newSpawnState =
@@ -116,7 +116,7 @@ let Update(dt : float32)(gameState : GameState) =
    { 
       gameState with Spawnrate   = newSpawnState
                      Factories   = UpdateFactories dt spawnNewFactory gameState.Factories
-                     Trucks      = gameState.Trucks
+                     Trucks      = UpdateTrucks dt gameState.Factories gameState.Trucks
                      Endpoints   = gameState.Endpoints
    }
 
