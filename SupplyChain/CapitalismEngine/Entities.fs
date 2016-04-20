@@ -2,6 +2,11 @@
 
 open Microsoft.Xna.Framework
 
+let rec last (x :'a List) = 
+   match x with
+      | [i] -> i
+      | (i::ls) -> last ls
+
 type Waypoint = 
     {
         coordinatesX : int
@@ -23,7 +28,12 @@ type Route =
          {
             route = waypoints
          }
-
+      member r.lastWaypoint() =
+         last r.route
+      member r.nextWaypoint() =
+         r.route.Head 
+         //add Take last waypoint method
+         //add take next waypoint method
 type Truck = 
     {
         coordinatesX : int
