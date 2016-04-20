@@ -8,8 +8,8 @@ let RandomNumberV(vL) = RandomGen.Next(0,vL)
 
 let spawnFactory() =
    {
-      Factory.coordinatesX = RandomNumberH(1600);
-      Factory.coordinatesY = RandomNumberV(900);
+      Factory.coordinatesX = float32(RandomNumberH(1600));
+      Factory.coordinatesY = float32(RandomNumberV(900));
       Factory.productionType = resources.[RNG.Next(0, resources.Length-1)];
       Factory.laboring = Working 10.0f
    }

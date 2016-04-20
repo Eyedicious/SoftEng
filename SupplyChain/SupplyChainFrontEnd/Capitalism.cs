@@ -22,7 +22,6 @@ namespace CapitalismFrontend
         MathEngine.GameState gameState;
         Texture2D background;
         Rectangle gameWindowSize;
-
         String backgroundImageName = "background_map.png";
 
         public Capitalism()
@@ -61,7 +60,7 @@ namespace CapitalismFrontend
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>(backgroundImageName);
-            MathEngine.ImageToBitMap(pathForImage("background_map.png"));
+            //MathEngine.ImageToBitMap(pathForImage("background_map.png"));
             gameWindowSize = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             // TODO: use this.Content to load your game content here
         }
@@ -103,7 +102,7 @@ namespace CapitalismFrontend
             spriteBatch.Draw(background, gameWindowSize, Color.White);
             foreach(var drawable in MathEngine.drawState(gameState))
             {
-                spriteBatch.Draw(Content.Load<Texture2D>(drawable.Image), drawable.Position, Color.White);
+               spriteBatch.Draw(Content.Load<Texture2D>(drawable.Image), drawable.Position, Color.White);
             }
             spriteBatch.End();
             

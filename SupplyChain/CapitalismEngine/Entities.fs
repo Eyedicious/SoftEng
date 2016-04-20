@@ -10,8 +10,8 @@ let rec last (x :'a List) =
 
 type Waypoint = 
     {
-        coordinatesX : int
-        coordinatesY : int
+        coordinatesX : float32
+        coordinatesY : float32
     }
     with
       member w.Create(x, y) = 
@@ -37,8 +37,8 @@ type Route =
          //add take next waypoint method
 type Truck = 
     {
-        coordinatesX : int
-        coordinatesY : int
+        coordinatesX : float32
+        coordinatesY : float32
         contentContainer : string
         route : Route
     }
@@ -55,8 +55,8 @@ type Truck =
         //add t.coordinatesX x
         //add t.coordinatesY y
      
-     override this.ToString() = "Factory is located at ( "+this.coordinatesX.ToString()+", "+this.coordinatesY.ToString()+" ) 
-                                 and producing "+this.contentContainer+")"
+     override this.ToString() = "Truck is located at ( "+this.coordinatesX.ToString()+", "+this.coordinatesY.ToString()+" ) 
+                                 and carrying "+this.contentContainer+")"
 
 type Endpoint = 
     {
@@ -83,8 +83,8 @@ type Production =
 
 type Factory = 
    {
-      coordinatesX : int
-      coordinatesY : int
+      coordinatesX : float32
+      coordinatesY : float32
       productionType : string
       laboring : Production
    }
@@ -96,7 +96,7 @@ type Factory =
       let destination = destinationArray.[rnmbr]
       let waypoints = {Waypoint.coordinatesX = fst (destination.getPosition()); Waypoint.coordinatesY = snd (destination.getPosition())} :: []
       let newroute = {Route.route = waypoints}
-      let newTruck = {Truck.coordinatesX = f.coordinatesX; Truck.coordinatesY = f.coordinatesY; Truck.contentContainer = f.productionType; Truck.route = newroute}
+      let newTruck = {Truck.coordinatesX = (f.coordinatesX); Truck.coordinatesY = (f.coordinatesY); Truck.contentContainer = f.productionType; Truck.route = newroute}
       newTruck
    member f.getPosition() = (f.coordinatesX, f.coordinatesY)
    member f.getProductivity() = f.laboring
