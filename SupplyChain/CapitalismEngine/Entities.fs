@@ -3,9 +3,12 @@
 open Microsoft.Xna.Framework
 
 let rec last (x :'a List) = 
-   match x with
-      | [i] -> i
-      | (i::ls) -> last ls
+    x |> List.rev |> List.head
+   
+//   match x with
+//      | [] -> []
+//      | [i] -> i
+//      | (i::ls) -> last ls
 
 type Waypoint = 
     {

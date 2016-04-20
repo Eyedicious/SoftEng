@@ -46,15 +46,7 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Container.fs" />
-    <Compile Include="Endpoint.fs" />
-    <Compile Include="Hub.fs" />
-    <Compile Include="Road.fs" />
-    <Compile Include="Ship.fs" />
-    <Compile Include="Truck.fs" />
-    <Compile Include="CanvasBuilder.fs" />
     <Compile Include="Entities.fs" />
-    <Compile Include="EntitiesManager.fs" />
     <Compile Include="BitmapProcessing.fs" />
     <Compile Include="MathEngine.fs" />
     <None Include="Script.fsx" />

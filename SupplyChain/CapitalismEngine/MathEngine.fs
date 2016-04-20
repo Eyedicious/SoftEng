@@ -37,6 +37,9 @@ type Terrain =
             t.WaterPixels
           | BitmapProcessing.TerrainType.Wasteland ->
             t.WastelandPixels
+          | BitmapProcessing.TerrainType.ProvinceBorder ->
+            //Do nothing since not implemetned
+            Seq.empty
        let randomIndex = ((new System.Random()).Next(0, (Seq.length collectionToUse) - 1))
        collectionToUse |> Seq.nth randomIndex
 
@@ -100,7 +103,7 @@ let UpdateTruck (dt:float32) (truck:Entities.Truck) =
 let deployTruck destinations (factory:Entities.Factory) = 
    factory.SpawnResource(destinations)
 
-let UpdateTrucks(dt : float32)(factories: List<Entities.Factory>)(trucks : List<Entities.Truck>) : Truck List= 
+let UpdateTrucks(dt : float32)(factories: List<Entities.Factory>)(trucks : List<Entities.Truck>) : Entities.Truck List= 
    let trucks = trucks |> foreachDo UpdateTruck dt
 
    let isFactoryProductive (f:Entities.Factory) = 
