@@ -80,7 +80,7 @@ let rec foreachDo (fn:'a->'b) (l:List<'a>) : 'b List =     //Foreach x DO fn y x
 let updateFactory (dt:float32) (factory:Entities.Factory) =
    match factory.laboring with
    |  Entities.Production.Ready ->
-      { factory with laboring = Entities.Production.Working 1000000000000.0f }
+      { factory with laboring = Entities.Production.Working 10.0f }
    | Entities.Production.Working w ->
       if not(w > 0.0f) then
          { factory with laboring = Entities.Production.Ready }
@@ -124,12 +124,12 @@ let UpdateTruck (dt:float32) (truck:Entities.Truck) =
    let truck = 
       if truck.route.lastWaypoint().coordinatesX <> truck.coordinatesX then
          if truck.route.lastWaypoint().coordinatesY <> truck.coordinatesY then
-            if xCoefficient < 5.0f && xCoefficient > 5.0f then
+            if xCoefficient < 0.5f && xCoefficient > -0.5f then
                { truck with coordinatesX = truck.route.lastWaypoint().coordinatesX}
             else
                { truck with coordinatesX = (truck.coordinatesX + (dt * 5.0f * isXNegative))}
          else
-            if xCoefficient < 10.0f && xCoefficient > 10.0f then
+            if xCoefficient < 0.5f && xCoefficient > -0.5f then
                { truck with coordinatesX = truck.route.lastWaypoint().coordinatesX}
             else
                { truck with coordinatesX = (truck.coordinatesX + (dt * 10.0f * isXNegative))}
@@ -138,15 +138,15 @@ let UpdateTruck (dt:float32) (truck:Entities.Truck) =
    let truck = 
       if truck.route.lastWaypoint().coordinatesY <> truck.coordinatesY then
          if truck.route.lastWaypoint().coordinatesX <> truck.coordinatesX then
-            if yCoefficient < 5.0f && yCoefficient > 5.0f then
+            if yCoefficient < 0.5f && yCoefficient > -0.5f then
                { truck with coordinatesY = truck.route.lastWaypoint().coordinatesY}
             else
-               { truck with coordinatesY = (truck.coordinatesY + (dt * 5.0f * isXNegative))}
+               { truck with coordinatesY = (truck.coordinatesY + (dt * 5.0f * isYNegative))}
          else
-            if yCoefficient < 10.0f && yCoefficient > 10.0f then
+            if yCoefficient < 0.5f && yCoefficient > -0.5f then
                { truck with coordinatesY = truck.route.lastWaypoint().coordinatesY}
             else
-               { truck with coordinatesY = (truck.coordinatesY + (dt * 10.0f * isXNegative))}
+               { truck with coordinatesY = (truck.coordinatesY + (dt * 10.0f * isYNegative))}
       else
          truck
    truck
@@ -159,13 +159,11 @@ let deployTruck destinations (factory:Entities.Factory) =
 
 let UpdateTrucks(dt : float32)(factories: List<Entities.Factory>)(trucks : List<Entities.Truck>) : Entities.Truck List = 
    let jobWellDone (t:Entities.Truck) = 
-      if (t.route.lastWaypoint().coordinatesX = t.coordinatesX) && t.route.lastWaypoint().coordinatesY = t.coordinatesY then
-         false
-      else true
-   let currentTrucks = filter jobWellDone trucks
+      not((t.route.lastWaypoint().coordinatesX = t.coordinatesX) && (t.route.lastWaypoint().coordinatesY = t.coordinatesY))
+   let drivingTrucks = filter jobWellDone trucks
    let x = foreachDo (UpdateTruck dt)
-   let currentTrucks = trucks |> foreachDo (UpdateTruck dt)
-   let isFactoryProductive (f:Entities.Factory) = 
+   let currentTrucks = drivingTrucks |> foreachDo (UpdateTruck dt)
+   let isFactoryProductive (f:Entities.Factory) =
       f.laboring = Entities.Production.Ready
    let productiveFactories = filter isFactoryProductive factories
    if factories.Length > 1 then
@@ -190,8 +188,8 @@ let Update(dt : float32)(gameState : GameState) =
          for n = 0 to endpointAmount do
             let xy = TerrainCollection.getRandomTileCoordinates(BitmapProcessing.TerrainType.Land)
             newEndpoints <- {
-                              Entities.City.coordinatesX = fst xy
-                              Entities.City.coordinatesY = snd xy
+                              Entities.City.coordinatesX = fst xy |> float32
+                              Entities.City.coordinatesY = snd xy |> float32
                            } :: newEndpoints
          newEndpoints
       else
@@ -202,8 +200,8 @@ let Update(dt : float32)(gameState : GameState) =
          for n = 0 to hubAmount do
             let xy = TerrainCollection.getRandomTileCoordinates(BitmapProcessing.TerrainType.Land)
             newHubs <- {
-               Entities.Hub.coordinatesX = fst xy
-               Entities.Hub.coordinatesY = snd xy
+               Entities.Hub.coordinatesX = fst xy |> float32
+               Entities.Hub.coordinatesY = snd xy |> float32
             } :: newHubs
          newHubs
       else
