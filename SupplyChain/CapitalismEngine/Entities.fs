@@ -4,16 +4,11 @@ open Microsoft.Xna.Framework
 
 let rec last (x :'a List) = 
     x |> List.rev |> List.head
-   
-//   match x with
-//      | [] -> []
-//      | [i] -> i
-//      | (i::ls) -> last ls
 
 type Waypoint = 
     {
-        coordinatesX : int
-        coordinatesY : int
+        coordinatesX : float32
+        coordinatesY : float32
     }
     with
       member w.Create(x, y) = 
@@ -39,8 +34,8 @@ type Route =
          //add take next waypoint method
 type Truck = 
     {
-        coordinatesX : int
-        coordinatesY : int
+        coordinatesX : float32
+        coordinatesY : float32
         contentContainer : string
         route : Route
     }
@@ -52,27 +47,29 @@ type Truck =
             contentContainer = content
             route = route
         }
-     //member t.Move(x, y) =
-        //let add cv v = cv := v
-        //add t.coordinatesX x
-        //add t.coordinatesY y
+     member t.getPosition() = 
+      (t.coordinatesX, t.coordinatesY)
      
-     override this.ToString() = "Factory is located at ( "+this.coordinatesX.ToString()+", "+this.coordinatesY.ToString()+" ) 
-                                 and producing "+this.contentContainer+")"
+     override this.ToString() = "Truck is located at ( "+this.coordinatesX.ToString()+", "+this.coordinatesY.ToString()+" ) 
+                                 and carrying "+this.contentContainer+")"
 
-type Endpoint = 
+type Hub = 
     {
         coordinatesX : int
         coordinatesY : int
     }
     with
-     static member Create(x, y) = 
-        {
-            coordinatesX = x
-            coordinatesY = y
-        }
+     member h.position with get() = (h.coordinatesX, h.coordinatesY)
+     override this.ToString() = "Hub is located at ( "+this.coordinatesX.ToString()+", "+this.coordinatesY.ToString()+")"
 
-     override this.ToString() = "Endpoint is located at ( "+this.coordinatesX.ToString()+", "+this.coordinatesY.ToString()+")"
+type City = 
+    {
+        coordinatesX : int
+        coordinatesY : int
+    }
+    with    
+     member c.position with get() = (c.coordinatesX, c.coordinatesY)
+     override this.ToString() = "Hub is located at ( "+this.coordinatesX.ToString()+", "+this.coordinatesY.ToString()+")"
 
 
 let resources = ["Grain"; "Copper"; "Iron"; "Chair"; "Coffee"; "Potatoes"; "Goo"; "Pizza"; "Math"; "Wood"; "Uranium"; "Nuclear Warhead"; "Sugar"; "Wealthy spoiled bratty kids"; "Taco Bell"; "Gold"]
@@ -81,14 +78,12 @@ type Production =
       | Working of float32
       | Ready
 
-//let image = image.FromFile(System.AppDomain.CurrentDomain.BaseDirectory+"\Graphical Interface\Images\factory-1.jpg")
-
 type Factory = 
    {
-      coordinatesX : int
-      coordinatesY : int
+      coordinatesX : float32
+      coordinatesY : float32
       productionType : string
-      laboring : Production
+      mutable laboring : Production
    }
    with
    member f.SpawnResource(destinations : List<Factory>) = 
@@ -96,11 +91,14 @@ type Factory =
       let rnmbr = random.Next(destinations.Length)
       let destinationArray = destinations |> List.toArray
       let destination = destinationArray.[rnmbr]
-      let waypoints = {Waypoint.coordinatesX = fst (destination.getPosition()); Waypoint.coordinatesY = snd (destination.getPosition())} :: []
+      let waypoints = {Waypoint.coordinatesX = fst (destination.position); Waypoint.coordinatesY = snd (destination.position)} :: []
       let newroute = {Route.route = waypoints}
-      let newTruck = {Truck.coordinatesX = f.coordinatesX; Truck.coordinatesY = f.coordinatesY; Truck.contentContainer = f.productionType; Truck.route = newroute}
+      let newTruck = {  Truck.coordinatesX = f.coordinatesX; 
+                        Truck.coordinatesY = f.coordinatesY; 
+                        Truck.contentContainer = f.productionType; 
+                        Truck.route = newroute }
       newTruck
-   member f.getPosition() = (f.coordinatesX, f.coordinatesY)
-   member f.getProductivity() = f.laboring
+   member f.position with get() = (f.coordinatesX, f.coordinatesY)
+   member f.productionCycle with get() = f.laboring and set(value) = f.laboring <- value
    override this.ToString() = "Factory is located at ( "+(this.coordinatesX).ToString()+", "+(this.coordinatesY).ToString()+" ) 
                                  and producing "+this.productionType+")"

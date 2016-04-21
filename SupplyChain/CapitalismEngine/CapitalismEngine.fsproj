@@ -49,7 +49,6 @@
     <Compile Include="Entities.fs" />
     <Compile Include="BitmapProcessing.fs" />
     <Compile Include="MathEngine.fs" />
-    <None Include="Script.fsx" />
     <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>

@@ -42,3 +42,7 @@ G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug
 G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\obj\Debug\CapitalismFrontEnd.csprojResolveAssemblyReference.cache
 F:\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\ConsoleApplication1.exe.config
 F:\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\obj\Debug\ConsoleApplication1.pdb
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Content\Objects\truck.png
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Content\Objects\city.png
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Content\Objects\factory.png
+G:\Users\Bart\Documents\GitHub\SoftEng\SupplyChain\SupplyChainFrontEnd\bin\Debug\Content\Objects\hub.png
