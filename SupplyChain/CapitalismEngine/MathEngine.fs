@@ -1,10 +1,11 @@
 ﻿module MathEngine
 
-open Entities
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Input
 
-let factoryAmount = 10
+let factoryAmount = 2
+let hubAmount = 1
+let endpointAmount = 1
 
 type Spawnable =
    | Cooldown of float32
@@ -14,33 +15,53 @@ type GameState =
    {
       Factories      : List<Entities.Factory>
       Trucks         : List<Entities.Truck>
-      Endpoints      : List<Entities.Endpoint>
+      Hubs            : List<Entities.Hub>
+      Endpoints      : List<Entities.City>
       Spawnrate      : Spawnable
    }
 
 type Drawable = 
-  {
-    Position : Vector2
-    Image    : string
-  }
+   {
+     Position : Vector2
+     Image    : string
+   }
 
-let initialize() = 
-  {
-    Factories  = []
-    Trucks     = []
-    Endpoints  = []
-    Spawnrate  = Spawnable.Ready
-  }
-//let LoadContent() =
-//   {
-//      //
-//   }
-//
-//let UnloadContent() =
-//   {
-//      //
-//   }
-//
+type Terrain =
+    {
+      LandPixels        : seq<int * int>
+      WaterPixels       : seq<int * int>
+      WastelandPixels   : seq<int * int>
+    } member t.getRandomTileCoordinates(typeOfTile: BitmapProcessing.TerrainType) =
+       let collectionToUse = 
+          match typeOfTile with
+          | BitmapProcessing.TerrainType.Land ->
+            t.LandPixels
+          | BitmapProcessing.TerrainType.Water ->
+            t.WaterPixels
+          | BitmapProcessing.TerrainType.Wasteland ->
+            t.WastelandPixels
+          | BitmapProcessing.TerrainType.ProvinceBorder ->
+            //Do nothing since not implemetned
+            Seq.empty
+       let randomIndex = ((new System.Random()).Next(0, (Seq.length collectionToUse) - 1))
+       collectionToUse |> Seq.nth randomIndex
+
+let setupEngineState() =  
+   {
+      Factories  = []
+      Trucks     = []
+      Hubs        = []
+      Endpoints  = []
+      Spawnrate  = Spawnable.Ready
+   }
+
+let mutable TerrainCollection =
+   {
+      LandPixels        = Seq.empty
+      WaterPixels       = Seq.empty
+      WastelandPixels   = Seq.empty
+   }
+
 let rec filter (fn:'a -> bool) (e:'a List) = 
    match e with
    | [] -> []
@@ -51,17 +72,17 @@ let rec filter (fn:'a -> bool) (e:'a List) =
          filter fn xs
 
 let rec foreachDo (fn:'a->'b) (l:List<'a>) : 'b List =     //Foreach x DO fn y x and return the editted list
-   match l with
-      | [] -> []
-      | (x::xs) ->
-         (fn x) :: (foreachDo fn xs)
+    match l with
+       | [] -> []
+       | (x::xs) ->
+          (fn x) :: (foreachDo fn xs)
 
-let updateFactory (dt:float32) (factory:Entities.Factory) : Factory =
+let updateFactory (dt:float32) (factory:Entities.Factory) =
    match factory.laboring with
    |  Entities.Production.Ready ->
-      { factory with laboring = Entities.Production.Working 10.0f }
+      { factory with laboring = Entities.Production.Working 1000000000000.0f }
    | Entities.Production.Working w ->
-      if w < 0.0f then
+      if not(w > 0.0f) then
          { factory with laboring = Entities.Production.Ready }
       else
          { factory with laboring = Entities.Production.Working(w-dt) }
@@ -69,11 +90,17 @@ let updateFactory (dt:float32) (factory:Entities.Factory) : Factory =
 let UpdateFactories (dt : float32)(spawnNewFactory)(listOfFactories:List<Entities.Factory>) =
    
    let factories = listOfFactories |> foreachDo (updateFactory dt)
-
+   
    let newFactoriesList =
-      if listOfFactories.Length < factoryAmount then
+      if factories.Length < factoryAmount then
          if spawnNewFactory then
-            EntitiesManager.spawnFactory() :: factories
+            let xy = TerrainCollection.getRandomTileCoordinates(BitmapProcessing.TerrainType.Land)
+            {
+               Entities.Factory.coordinatesX = fst xy |> float32
+               Entities.Factory.coordinatesY = snd xy |> float32
+               Entities.Factory.productionType = ""//resources.[RNG.Next(0, resources.Length-1)];
+               Entities.Factory.laboring = Entities.Production.Working 10.0f
+            } :: factories
          else
             factories
       else
@@ -87,13 +114,13 @@ let UpdateTruck (dt:float32) (truck:Entities.Truck) =
       if xCoefficient < 0.0f then
          -1.0f
       else
-         1.0f
+          1.0f
    let isYNegative = 
       if yCoefficient < 0.0f then
          -1.0f
       else
          1.0f
-
+ 
    let truck = 
       if truck.route.lastWaypoint().coordinatesX <> truck.coordinatesX then
          if truck.route.lastWaypoint().coordinatesY <> truck.coordinatesY then
@@ -124,28 +151,28 @@ let UpdateTruck (dt:float32) (truck:Entities.Truck) =
          truck
    truck
 
-let deployTruck destinations (factory:Factory) = 
+let deployTruck destinations (factory:Entities.Factory) = 
    let isSamePlace location = 
       not(factory = location)
    let newDestinations = filter isSamePlace destinations
    factory.SpawnResource(newDestinations)
 
-let UpdateTrucks(dt : float32)(factories: List<Entities.Factory>)(trucks : List<Entities.Truck>) : Truck List = 
-   let jobWellDone t = 
+let UpdateTrucks(dt : float32)(factories: List<Entities.Factory>)(trucks : List<Entities.Truck>) : Entities.Truck List = 
+   let jobWellDone (t:Entities.Truck) = 
       if (t.route.lastWaypoint().coordinatesX = t.coordinatesX) && t.route.lastWaypoint().coordinatesY = t.coordinatesY then
          false
       else true
    let currentTrucks = filter jobWellDone trucks
+   let x = foreachDo (UpdateTruck dt)
    let currentTrucks = trucks |> foreachDo (UpdateTruck dt)
-
    let isFactoryProductive (f:Entities.Factory) = 
-      f.laboring = Production.Ready
+      f.laboring = Entities.Production.Ready
    let productiveFactories = filter isFactoryProductive factories
    if factories.Length > 1 then
       let nextShift = foreachDo (deployTruck factories) productiveFactories
       currentTrucks @ nextShift
    else
-   currentTrucks
+      currentTrucks
 
 let Update(dt : float32)(gameState : GameState) =
    let spawnNewFactory, newSpawnState =
@@ -157,25 +184,72 @@ let Update(dt : float32)(gameState : GameState) =
             false, Cooldown(c-dt)
          else
             false, Ready     
+   let newEndpoints = 
+      if not(Seq.length gameState.Endpoints > 0) then
+         let mutable newEndpoints = []
+         for n = 0 to endpointAmount do
+            let xy = TerrainCollection.getRandomTileCoordinates(BitmapProcessing.TerrainType.Land)
+            newEndpoints <- {
+                              Entities.City.coordinatesX = fst xy
+                              Entities.City.coordinatesY = snd xy
+                           } :: newEndpoints
+         newEndpoints
+      else
+         gameState.Endpoints
+   let newHubs = 
+      if not(Seq.length gameState.Hubs > 0) then
+         let mutable newHubs = []
+         for n = 0 to hubAmount do
+            let xy = TerrainCollection.getRandomTileCoordinates(BitmapProcessing.TerrainType.Land)
+            newHubs <- {
+               Entities.Hub.coordinatesX = fst xy
+               Entities.Hub.coordinatesY = snd xy
+            } :: newHubs
+         newHubs
+      else
+         gameState.Hubs
    { 
       gameState with Spawnrate   = newSpawnState
                      Factories   = UpdateFactories dt spawnNewFactory gameState.Factories
                      Trucks      = UpdateTrucks dt gameState.Factories gameState.Trucks
-                     Endpoints   = gameState.Endpoints
+                     Hubs        = newHubs
+                     Endpoints   = newEndpoints
+   }
+
+let drawTruck(truck:Entities.Truck) : Drawable =
+   {
+      Drawable.Position = Vector2((float32(fst(truck.getPosition()))),(float32(snd (truck.getPosition()))))
+      Drawable.Image = "truck.png"
    }
 
 let drawFactory(factory:Entities.Factory) : Drawable =
   {
-    Drawable.Position = Vector2((float32(fst(factory.getPosition()))),(float32(snd (factory.getPosition()))))
-    Drawable.Image    = "factory-11.png"
+    Drawable.Position = Vector2((float32(fst(factory.position))),(float32(snd (factory.position))))
+    Drawable.Image    = "factory.png"
+  }
+
+let drawHub(hub:Entities.Hub) : Drawable =
+   {
+      Drawable.Position = Vector2((float32(fst(hub.position))),(float32(snd (hub.position))))
+      Drawable.Image = "hub.png"
+   }
+
+let drawCity(city:Entities.City) : Drawable =
+  {
+    Drawable.Position = Vector2((float32(fst(city.position))),(float32(snd (city.position))))
+    Drawable.Image    = "city.png"
   }
 
 let drawState (gameState:GameState) : seq<Drawable> =
-   let newDrawableFactories = Seq.empty
-//   Terrible recursive attempt to do the map function FUCK MIDNIGHT PROGRAMMING. ps. gotta fix dis
-//   let rec loop (acc:List<Entities.Factory>) = function
-//      | [] -> List.rev acc
-//      | head::tail -> drawFactory(head) :: newDrawableFactories loop tail
-//   []
-   let newList = gameState.Factories |> List.map(fun factory -> drawFactory(factory))
-   newList |> Seq.cast
+      let seqX = Seq.append (gameState.Factories |> foreachDo drawFactory) (gameState.Trucks |> foreachDo drawTruck) 
+      let seqY = Seq.append (gameState.Hubs |> foreachDo drawHub) (gameState.Endpoints |> foreachDo drawCity)
+      Seq.append seqX seqY
+
+let setBitMap imagePath = 
+   let terrains = BitmapProcessing.mapBitMapToTerrain(imagePath)
+   TerrainCollection <- {
+      LandPixels = snd (terrains |> Seq.find(fun (terrain,sequence) -> terrain = BitmapProcessing.Land))
+      WaterPixels = snd (terrains |> Seq.find(fun (terrain,sequence) -> terrain = BitmapProcessing.Water))
+      WastelandPixels = snd (terrains |> Seq.find(fun (terrain,sequence) -> terrain = BitmapProcessing.Wasteland))
+   }
+   
