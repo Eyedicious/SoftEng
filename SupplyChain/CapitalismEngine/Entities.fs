@@ -1,9 +1,10 @@
 ﻿module Entities
 
 open Microsoft.Xna.Framework
+open System
 
-let rec last (x :'a List) = 
-    x |> List.rev |> List.head
+let last (x :'a List) = 
+    x |> List.rev |> List.head 
 
 type Waypoint = 
     {
@@ -86,12 +87,18 @@ type Factory =
       mutable laboring : Production
    }
    with
-   member f.SpawnResource(destinations : List<Factory>) = 
+   member f.SpawnResource(hubs : Hub List, cities : City List) = 
+      let mutable closestHub = hubs.Head
+      for h in hubs do
+      //get closest hub to factory
+         if (Math.Abs((h.coordinatesX |> float32) - f.coordinatesX) + Math.Abs((h.coordinatesY |> float32) - f.coordinatesY)) < (Math.Abs((closestHub.coordinatesX |> float32) - f.coordinatesX) + Math.Abs((closestHub.coordinatesY |> float32) - f.coordinatesY)) then
+            closestHub <- h
+
       let random = new System.Random()
-      let rnmbr = random.Next(destinations.Length)
-      let destinationArray = destinations |> List.toArray
-      let destination = destinationArray.[rnmbr]
-      let waypoints = {Waypoint.coordinatesX = fst (destination.position); Waypoint.coordinatesY = snd (destination.position)} :: []
+      let cityArray = cities |> List.toArray
+      let cityTarget = cityArray.[random.Next(cityArray.Length)]
+      let lastWaypoint = {Waypoint.coordinatesX = cityTarget.coordinatesX; Waypoint.coordinatesY = cityTarget.coordinatesY} :: []
+      let waypoints = {Waypoint.coordinatesX = closestHub.coordinatesX; Waypoint.coordinatesY = closestHub.coordinatesY} :: lastWaypoint
       let newroute = {Route.route = waypoints}
       let newTruck = {  Truck.coordinatesX = f.coordinatesX; 
                         Truck.coordinatesY = f.coordinatesY; 

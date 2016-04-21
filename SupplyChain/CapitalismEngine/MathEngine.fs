@@ -2,6 +2,7 @@
 
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Input
+open Entities
 
 let factoryAmount = 2
 let hubAmount = 1
@@ -108,8 +109,16 @@ let UpdateFactories (dt : float32)(spawnNewFactory)(listOfFactories:List<Entitie
    newFactoriesList
 
 let UpdateTruck (dt:float32) (truck:Entities.Truck) =
-   let xCoefficient = truck.route.lastWaypoint().coordinatesX - truck.coordinatesX
-   let yCoefficient = truck.route.lastWaypoint().coordinatesY - truck.coordinatesY
+   let truck = 
+      if truck.route.nextWaypoint().coordinatesX = truck.coordinatesX && truck.route.nextWaypoint().coordinatesY = truck.coordinatesY then
+         if not(truck.route.route.Tail.IsEmpty) then
+            { truck with route = { truck.route with route = truck.route.route.Tail}}
+         else
+            truck
+      else
+         truck
+   let xCoefficient = truck.route.nextWaypoint().coordinatesX - truck.coordinatesX
+   let yCoefficient = truck.route.nextWaypoint().coordinatesY - truck.coordinatesY
    let isXNegative =
       if xCoefficient < 0.0f then
          -1.0f
@@ -122,52 +131,51 @@ let UpdateTruck (dt:float32) (truck:Entities.Truck) =
          1.0f
  
    let truck = 
-      if truck.route.lastWaypoint().coordinatesX <> truck.coordinatesX then
-         if truck.route.lastWaypoint().coordinatesY <> truck.coordinatesY then
+      if truck.route.nextWaypoint().coordinatesX <> truck.coordinatesX then
+         if truck.route.nextWaypoint().coordinatesY <> truck.coordinatesY then
             if xCoefficient < 0.5f && xCoefficient > -0.5f then
-               { truck with coordinatesX = truck.route.lastWaypoint().coordinatesX}
+               { truck with coordinatesX = truck.route.nextWaypoint().coordinatesX}
             else
                { truck with coordinatesX = (truck.coordinatesX + (dt * 5.0f * isXNegative))}
          else
             if xCoefficient < 0.5f && xCoefficient > -0.5f then
-               { truck with coordinatesX = truck.route.lastWaypoint().coordinatesX}
+               { truck with coordinatesX = truck.route.nextWaypoint().coordinatesX}
             else
                { truck with coordinatesX = (truck.coordinatesX + (dt * 10.0f * isXNegative))}
       else
          truck
    let truck = 
-      if truck.route.lastWaypoint().coordinatesY <> truck.coordinatesY then
-         if truck.route.lastWaypoint().coordinatesX <> truck.coordinatesX then
+      if truck.route.nextWaypoint().coordinatesY <> truck.coordinatesY then
+         if truck.route.nextWaypoint().coordinatesX <> truck.coordinatesX then
             if yCoefficient < 0.5f && yCoefficient > -0.5f then
-               { truck with coordinatesY = truck.route.lastWaypoint().coordinatesY}
+               { truck with coordinatesY = truck.route.nextWaypoint().coordinatesY}
             else
                { truck with coordinatesY = (truck.coordinatesY + (dt * 5.0f * isYNegative))}
          else
             if yCoefficient < 0.5f && yCoefficient > -0.5f then
-               { truck with coordinatesY = truck.route.lastWaypoint().coordinatesY}
+               { truck with coordinatesY = truck.route.nextWaypoint().coordinatesY}
             else
                { truck with coordinatesY = (truck.coordinatesY + (dt * 10.0f * isYNegative))}
       else
          truck
    truck
 
-let deployTruck destinations (factory:Entities.Factory) = 
-   let isSamePlace location = 
-      not(factory = location)
-   let newDestinations = filter isSamePlace destinations
-   factory.SpawnResource(newDestinations)
+let deployTruck hubs destinations (factory:Entities.Factory) = 
+   factory.SpawnResource(hubs, destinations)
 
-let UpdateTrucks(dt : float32)(factories: List<Entities.Factory>)(trucks : List<Entities.Truck>) : Entities.Truck List = 
+let moveOn truck = 
+   truck
+
+let UpdateTrucks(dt : float32)(factories: List<Entities.Factory>)(hubs : Hub List)(cities : City List)(trucks : List<Entities.Truck>) : Entities.Truck List = 
    let jobWellDone (t:Entities.Truck) = 
       not((t.route.lastWaypoint().coordinatesX = t.coordinatesX) && (t.route.lastWaypoint().coordinatesY = t.coordinatesY))
    let drivingTrucks = filter jobWellDone trucks
-   let x = foreachDo (UpdateTruck dt)
    let currentTrucks = drivingTrucks |> foreachDo (UpdateTruck dt)
    let isFactoryProductive (f:Entities.Factory) =
       f.laboring = Entities.Production.Ready
    let productiveFactories = filter isFactoryProductive factories
    if factories.Length > 1 then
-      let nextShift = foreachDo (deployTruck factories) productiveFactories
+      let nextShift = foreachDo (deployTruck hubs cities) productiveFactories
       currentTrucks @ nextShift
    else
       currentTrucks
@@ -209,7 +217,7 @@ let Update(dt : float32)(gameState : GameState) =
    { 
       gameState with Spawnrate   = newSpawnState
                      Factories   = UpdateFactories dt spawnNewFactory gameState.Factories
-                     Trucks      = UpdateTrucks dt gameState.Factories gameState.Trucks
+                     Trucks      = UpdateTrucks dt gameState.Factories gameState.Hubs gameState.Endpoints gameState.Trucks
                      Hubs        = newHubs
                      Endpoints   = newEndpoints
    }
@@ -241,7 +249,7 @@ let drawCity(city:Entities.City) : Drawable =
 let drawState (gameState:GameState) : seq<Drawable> =
       let seqX = Seq.append (gameState.Factories |> foreachDo drawFactory) (gameState.Trucks |> foreachDo drawTruck) 
       let seqY = Seq.append (gameState.Hubs |> foreachDo drawHub) (gameState.Endpoints |> foreachDo drawCity)
-      Seq.append seqX seqY
+      Seq.append seqY seqX
 
 let setBitMap imagePath = 
    let terrains = BitmapProcessing.mapBitMapToTerrain(imagePath)

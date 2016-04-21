@@ -163,7 +163,8 @@ namespace CapitalismFrontend
             spriteBatch.Draw(background, new Vector2(backgroundRec.X, backgroundRec.Y), null, Color.White, 0f, new Vector2(0, 0), backgroundScale, SpriteEffects.None, 1f);
             foreach (var drawable in MathEngine.drawState(engineState))
             {
-               spriteBatch.Draw(Content.Load<Texture2D>(ObjectsDirectory + drawable.Image), PositionOnMap(drawable.Position, backgroundScale), null, Color.White, 0f, new Vector2(0, 0), 1f, SpriteEffects.None, 1f);
+               Texture2D sprite = Content.Load<Texture2D>(ObjectsDirectory + drawable.Image);
+               spriteBatch.Draw(sprite, PositionOnMap(drawable.Position, backgroundScale), null, Color.White, 0f, new Vector2(sprite.Bounds.Center.X, sprite.Bounds.Center.Y), 1f, SpriteEffects.None, 1f);
             }
          }
 
