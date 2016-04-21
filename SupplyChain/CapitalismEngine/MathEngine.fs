@@ -80,7 +80,7 @@ let rec foreachDo (fn:'a->'b) (l:List<'a>) : 'b List =     //Foreach x DO fn y x
 let updateFactory (dt:float32) (factory:Entities.Factory) =
    match factory.laboring with
    |  Entities.Production.Ready ->
-      { factory with laboring = Entities.Production.Working 1000000000000.0f }
+      { factory with laboring = Entities.Production.Working 10.0f }
    | Entities.Production.Working w ->
       if not(w > 0.0f) then
          { factory with laboring = Entities.Production.Ready }
@@ -88,7 +88,6 @@ let updateFactory (dt:float32) (factory:Entities.Factory) =
          { factory with laboring = Entities.Production.Working(w-dt) }
 
 let UpdateFactories (dt : float32)(spawnNewFactory)(listOfFactories:List<Entities.Factory>) =
-   
    let factories = listOfFactories |> foreachDo (updateFactory dt)
    
    let newFactoriesList =
@@ -124,12 +123,12 @@ let UpdateTruck (dt:float32) (truck:Entities.Truck) =
    let truck = 
       if truck.route.lastWaypoint().coordinatesX <> truck.coordinatesX then
          if truck.route.lastWaypoint().coordinatesY <> truck.coordinatesY then
-            if xCoefficient < 5.0f && xCoefficient > 5.0f then
+            if xCoefficient < 0.5f && xCoefficient > -0.5f then
                { truck with coordinatesX = truck.route.lastWaypoint().coordinatesX}
             else
                { truck with coordinatesX = (truck.coordinatesX + (dt * 5.0f * isXNegative))}
          else
-            if xCoefficient < 10.0f && xCoefficient > 10.0f then
+            if xCoefficient < 0.5f && xCoefficient > -0.5f then
                { truck with coordinatesX = truck.route.lastWaypoint().coordinatesX}
             else
                { truck with coordinatesX = (truck.coordinatesX + (dt * 10.0f * isXNegative))}
@@ -138,12 +137,12 @@ let UpdateTruck (dt:float32) (truck:Entities.Truck) =
    let truck = 
       if truck.route.lastWaypoint().coordinatesY <> truck.coordinatesY then
          if truck.route.lastWaypoint().coordinatesX <> truck.coordinatesX then
-            if yCoefficient < 5.0f && yCoefficient > 5.0f then
+            if yCoefficient < 0.5f && yCoefficient > -0.5f then
                { truck with coordinatesY = truck.route.lastWaypoint().coordinatesY}
             else
                { truck with coordinatesY = (truck.coordinatesY + (dt * 5.0f * isXNegative))}
          else
-            if yCoefficient < 10.0f && yCoefficient > 10.0f then
+            if yCoefficient < 0.5f && yCoefficient > -0.5f then
                { truck with coordinatesY = truck.route.lastWaypoint().coordinatesY}
             else
                { truck with coordinatesY = (truck.coordinatesY + (dt * 10.0f * isXNegative))}
@@ -151,34 +150,32 @@ let UpdateTruck (dt:float32) (truck:Entities.Truck) =
          truck
    truck
 
-let deployTruck destinations (factory:Entities.Factory) = 
+let deployTruck destinations (hub:Entities.Hub) = 
    let isSamePlace location = 
-      not(factory = location)
+      not(hub = location)
    let newDestinations = filter isSamePlace destinations
-   factory.SpawnResource(newDestinations)
+   //factory.SpawnResource(newDestinations)
+   0
 
-let UpdateTrucks(dt : float32)(factories: List<Entities.Factory>)(trucks : List<Entities.Truck>) : Entities.Truck List = 
-   let jobWellDone (t:Entities.Truck) = 
-      if (t.route.lastWaypoint().coordinatesX = t.coordinatesX) && t.route.lastWaypoint().coordinatesY = t.coordinatesY then
-         false
-      else true
-   let currentTrucks = filter jobWellDone trucks
-   let x = foreachDo (UpdateTruck dt)
-   let currentTrucks = trucks |> foreachDo (UpdateTruck dt)
-   let isFactoryProductive (f:Entities.Factory) = 
+let UpdateTrucks dt trucks factories hubs = 
+   let spawnTruckForFactories = Seq.map(fun (factory:Entities.Factory) -> factory.SpawnResource(hubs))
+   
+   let hasReachedDestination (t:Entities.Truck) = 
+      not((t.route.lastWaypoint().coordinatesX = t.coordinatesX) && (t.route.lastWaypoint().coordinatesY = t.coordinatesY))
+   
+   let isReady (f:Entities.Factory) =
       f.laboring = Entities.Production.Ready
-   let productiveFactories = filter isFactoryProductive factories
-   if factories.Length > 1 then
-      let nextShift = foreachDo (deployTruck factories) productiveFactories
-      currentTrucks @ nextShift
-   else
-      currentTrucks
+
+   let drivingTrucks = filter hasReachedDestination trucks
+   let currentTrucks = drivingTrucks |> foreachDo (UpdateTruck dt)
+   let readyFactories = filter isReady factories 
+   currentTrucks @ (readyFactories |> spawnTruckForFactories |> Seq.toList)
 
 let Update(dt : float32)(gameState : GameState) =
    let spawnNewFactory, newSpawnState =
       match gameState.Spawnrate with
       | Ready ->
-         true, Cooldown 0.1f
+         true, Cooldown 1.0f
       | Cooldown c->
          if c > 0.0f then
             false, Cooldown(c-dt)
@@ -211,9 +208,9 @@ let Update(dt : float32)(gameState : GameState) =
    { 
       gameState with Spawnrate   = newSpawnState
                      Factories   = UpdateFactories dt spawnNewFactory gameState.Factories
-                     Trucks      = UpdateTrucks dt gameState.Factories gameState.Trucks
                      Hubs        = newHubs
                      Endpoints   = newEndpoints
+                     Trucks      = UpdateTrucks dt gameState.Trucks gameState.Factories gameState.Hubs 
    }
 
 let drawTruck(truck:Entities.Truck) : Drawable =
